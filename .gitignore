@@ -1,0 +1,4 @@
+/build/logs/clover.xml
+/composer.lock
+/phpunit.xml
+/vendor
