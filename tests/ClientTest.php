@@ -3,7 +3,7 @@
 /*
  * This file is part of the ActiveCampaign API SDK.
  *
- * (c) Daniele De Nobili <daniele@metaline.it>
+ * (c) Meta Line S.r.l.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
