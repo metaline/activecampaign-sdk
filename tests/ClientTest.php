@@ -20,6 +20,10 @@ use MetaLine\ActiveCampaign\Client;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
+/**
+ * @author Daniele De Nobili
+ * @covers \MetaLine\ActiveCampaign\Client
+ */
 final class ClientTest extends TestCase
 {
     /**
