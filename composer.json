@@ -4,8 +4,7 @@
     "keywords": [
         "activecampaign",
         "api",
-        "http client",
-        "psr-18"
+        "sdk"
     ],
     "homepage": "https://github.com/metaline/activecampaign-api",
     "type": "library",
