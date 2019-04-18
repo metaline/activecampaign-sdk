@@ -13,7 +13,7 @@ Install the latest version with [Composer](https://getcomposer.org/). You may ne
 
 ```
 composer config minimum-stability dev
-composer require metaline/activecampaign-api
+composer require metaline/activecampaign-sdk
 ```
 
 ### Requirements
