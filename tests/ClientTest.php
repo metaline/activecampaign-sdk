@@ -31,6 +31,9 @@ final class ClientTest extends TestCase
      */
     private $container = [];
 
+    /**
+     * Tests a API call with GET method.
+     */
     public function testGet()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
@@ -39,6 +42,9 @@ final class ClientTest extends TestCase
         $this->assertRequest($this->container[0]['request'], 'GET', 'http://example.com/api/3/test');
     }
 
+    /**
+     * Tests a API call with POST method.
+     */
     public function testPost()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
@@ -47,6 +53,9 @@ final class ClientTest extends TestCase
         $this->assertRequest($this->container[0]['request'], 'POST', 'http://example.com/api/3/test', '{"key":"value"}');
     }
 
+    /**
+     * Tests a API call with PUT method.
+     */
     public function testPut()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
@@ -55,6 +64,9 @@ final class ClientTest extends TestCase
         $this->assertRequest($this->container[0]['request'], 'PUT', 'http://example.com/api/3/test', '{"key":"value"}');
     }
 
+    /**
+     * Tests a API call with DELETE method.
+     */
     public function testDelete()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
@@ -63,6 +75,10 @@ final class ClientTest extends TestCase
         $this->assertRequest($this->container[0]['request'], 'DELETE', 'http://example.com/api/3/test');
     }
 
+    /**
+     * @param Response $expectedResponse
+     * @return GuzzleClient
+     */
     private function createGuzzleClient(Response $expectedResponse)
     {
         $mock = new MockHandler([
@@ -90,6 +106,12 @@ final class ClientTest extends TestCase
         );
     }
 
+    /**
+     * @param RequestInterface $request
+     * @param string           $method
+     * @param string           $uri
+     * @param string           $body
+     */
     private function assertRequest(RequestInterface $request, $method, $uri, $body = null)
     {
         $this->assertEquals($method, $request->getMethod());
