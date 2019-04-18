@@ -41,6 +41,7 @@ final class ClientTest extends TestCase
 
         $this->assertTrue($result->isSuccessful());
         $this->assertEquals(['foo' => 'baz'], $result->getData());
+        $this->assertEquals([], $result->getErrors());
         $this->assertRequest($this->container[0]['request'], 'GET', 'http://example.com/api/3/test');
     }
 
@@ -54,7 +55,9 @@ final class ClientTest extends TestCase
 
         $this->assertTrue($result->isSuccessful());
         $this->assertEquals(['foo' => 'baz'], $result->getData());
-        $this->assertRequest($this->container[0]['request'], 'POST', 'http://example.com/api/3/test', '{"key":"value"}');
+        $this->assertEquals([], $result->getErrors());
+        $this->assertRequest($this->container[0]['request'], 'POST', 'http://example.com/api/3/test',
+            '{"key":"value"}');
     }
 
     /**
@@ -67,6 +70,7 @@ final class ClientTest extends TestCase
 
         $this->assertTrue($result->isSuccessful());
         $this->assertEquals(['foo' => 'baz'], $result->getData());
+        $this->assertEquals([], $result->getErrors());
         $this->assertRequest($this->container[0]['request'], 'PUT', 'http://example.com/api/3/test', '{"key":"value"}');
     }
 
@@ -80,7 +84,58 @@ final class ClientTest extends TestCase
 
         $this->assertTrue($result->isSuccessful());
         $this->assertEquals(['foo' => 'baz'], $result->getData());
+        $this->assertEquals([], $result->getErrors());
         $this->assertRequest($this->container[0]['request'], 'DELETE', 'http://example.com/api/3/test');
+    }
+
+    /**
+     * Tests API calls that returns errors.
+     */
+    public function testGenericErrors()
+    {
+        $client = $this->createClient(new Response(400));
+        $result = $client->get('test');
+
+        $this->assertFalse($result->isSuccessful());
+        $this->assertEquals([], $result->getData());
+        $this->assertEquals([], $result->getErrors());
+    }
+
+    /**
+     * Tests API calls that returns explained errors.
+     *
+     * @link https://developers.activecampaign.com/reference#errors
+     */
+    public function testExplainedErrors()
+    {
+        $client = $this->createClient(new Response(
+            400,
+            [],
+            '{"errors":[{"title":"The connection service was not provided.","source":{"pointer":"\/data\/attributes\/service"}},{"title":"The connection externalid was not provided.","source":{"pointer":"\/data\/attributes\/externalid"}}]}'
+        ));
+
+        $result = $client->get('test');
+
+        $errors = [
+            'errors' => [
+                [
+                    'title'  => 'The connection service was not provided.',
+                    'source' => [
+                        'pointer' => '/data/attributes/service',
+                    ],
+                ],
+                [
+                    'title'  => 'The connection externalid was not provided.',
+                    'source' => [
+                        'pointer' => '/data/attributes/externalid',
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertFalse($result->isSuccessful());
+        $this->assertEquals([], $result->getData());
+        $this->assertEquals($errors, $result->getErrors());
     }
 
     /**

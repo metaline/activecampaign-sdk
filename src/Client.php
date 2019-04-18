@@ -13,6 +13,7 @@ namespace MetaLine\ActiveCampaign;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 
@@ -116,9 +117,16 @@ final class Client
             $requestOptions[RequestOptions::JSON] = $data;
         }
 
-        $response = $this->guzzleClient->request($method, $uri, $requestOptions);
-        $data = json_decode($response->getBody(), true);
+        try {
+            $response = $this->guzzleClient->request($method, $uri, $requestOptions);
+            $successful = true;
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            $successful = false;
+        }
 
-        return new Result(true, $data);
+        $result = (array) json_decode($response->getBody(), true);
+
+        return new Result($successful, $result);
     }
 }
