@@ -9,10 +9,9 @@ This library is a simple PHP wrapper for the [ActiveCampaign API v3](https://dev
 
 ## Installation
 
-Install the latest version with [Composer](https://getcomposer.org/). You may need to lower your project's minimum stability requirements to `dev`, because this library is still under development:
+Install the latest version with [Composer](https://getcomposer.org/):
 
 ```
-composer config minimum-stability dev
 composer require metaline/activecampaign-sdk
 ```
 
