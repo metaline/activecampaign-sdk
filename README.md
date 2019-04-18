@@ -9,10 +9,11 @@ This library is a simple PHP wrapper for the [ActiveCampaign API v3](https://dev
 
 ## Installation
 
-Install the latest version with [Composer](https://getcomposer.org/):
+Install the latest version with [Composer](https://getcomposer.org/). You may need to lower your project's minimum stability requirements to `dev`, because this library is still under development:
 
 ```
-$ composer require metaline/activecampaign-api
+composer config minimum-stability dev
+composer require metaline/activecampaign-api
 ```
 
 ### Requirements
@@ -68,6 +69,20 @@ $result = $client->delete('contacts/' . $contactId);
 And so on.
 
 Check the ActiveCampaign [documentation](https://developers.activecampaign.com/v3/reference) for the other APIs.
+
+### Works with the Result object
+
+Client method calls always return a `Result` object, that it’s a simple value object:
+
+```php
+if ($result->isSuccessful()) {
+	$data = $result->getData();
+} else {
+	$errors = $result->getErrors();
+}
+```
+
+Debug the result to discover how to proceed.
 
 ## License
 

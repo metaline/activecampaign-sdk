@@ -47,6 +47,8 @@ final class Result
     }
 
     /**
+     * Returns true if the client response is successful, false otherwise.
+     *
      * @return bool
      */
     public function isSuccessful()
@@ -55,6 +57,10 @@ final class Result
     }
 
     /**
+     * Returns the data returned from the client call.
+     *
+     * If the result is failed, this method returns an empty array.
+     *
      * @return array
      */
     public function getData()
@@ -63,6 +69,10 @@ final class Result
     }
 
     /**
+     * Returns the errors returned from the client call.
+     *
+     * If the result is successful, this method returns an empty array.
+     *
      * @return array
      */
     public function getErrors()
