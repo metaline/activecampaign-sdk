@@ -37,8 +37,10 @@ final class ClientTest extends TestCase
     public function testGet()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
+        $result = $client->get('test');
 
-        $this->assertEquals(['foo' => 'baz'], $client->get('test'));
+        $this->assertTrue($result->isSuccessful());
+        $this->assertEquals(['foo' => 'baz'], $result->getData());
         $this->assertRequest($this->container[0]['request'], 'GET', 'http://example.com/api/3/test');
     }
 
@@ -48,8 +50,10 @@ final class ClientTest extends TestCase
     public function testPost()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
+        $result = $client->post('test', ['key' => 'value']);
 
-        $this->assertEquals(['foo' => 'baz'], $client->post('test', ['key' => 'value']));
+        $this->assertTrue($result->isSuccessful());
+        $this->assertEquals(['foo' => 'baz'], $result->getData());
         $this->assertRequest($this->container[0]['request'], 'POST', 'http://example.com/api/3/test', '{"key":"value"}');
     }
 
@@ -59,8 +63,10 @@ final class ClientTest extends TestCase
     public function testPut()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
+        $result = $client->put('test', ['key' => 'value']);
 
-        $this->assertEquals(['foo' => 'baz'], $client->put('test', ['key' => 'value']));
+        $this->assertTrue($result->isSuccessful());
+        $this->assertEquals(['foo' => 'baz'], $result->getData());
         $this->assertRequest($this->container[0]['request'], 'PUT', 'http://example.com/api/3/test', '{"key":"value"}');
     }
 
@@ -70,8 +76,10 @@ final class ClientTest extends TestCase
     public function testDelete()
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
+        $result = $client->delete('test');
 
-        $this->assertEquals(['foo' => 'baz'], $client->delete('test'));
+        $this->assertTrue($result->isSuccessful());
+        $this->assertEquals(['foo' => 'baz'], $result->getData());
         $this->assertRequest($this->container[0]['request'], 'DELETE', 'http://example.com/api/3/test');
     }
 

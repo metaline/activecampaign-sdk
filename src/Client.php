@@ -55,7 +55,7 @@ final class Client
 
     /**
      * @param string $path
-     * @return array
+     * @return Result
      * @throws GuzzleException
      */
     public function get($path)
@@ -66,7 +66,7 @@ final class Client
     /**
      * @param string $path
      * @param array  $body
-     * @return array
+     * @return Result
      * @throws GuzzleException
      */
     public function post($path, array $body)
@@ -77,7 +77,7 @@ final class Client
     /**
      * @param string $path
      * @param array  $body
-     * @return array
+     * @return Result
      * @throws GuzzleException
      */
     public function put($path, array $body)
@@ -87,7 +87,7 @@ final class Client
 
     /**
      * @param string $path
-     * @return array
+     * @return Result
      * @throws GuzzleException
      */
     public function delete($path)
@@ -99,7 +99,7 @@ final class Client
      * @param string $method
      * @param string $path
      * @param array  $data
-     * @return array
+     * @return Result
      * @throws GuzzleException
      */
     private function sendRequest($method, $path, array $data = null)
@@ -117,8 +117,8 @@ final class Client
         }
 
         $response = $this->guzzleClient->request($method, $uri, $requestOptions);
-        $result = json_decode($response->getBody(), true);
+        $data = json_decode($response->getBody(), true);
 
-        return $result;
+        return new Result(true, $data);
     }
 }
