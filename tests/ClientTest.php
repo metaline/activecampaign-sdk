@@ -31,15 +31,42 @@ final class ClientTest extends TestCase
      */
     private $container = [];
 
-    /**
-     * @var Client
-     */
-    private $client;
+    public function testGet()
+    {
+        $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
 
-    protected function setUp()
+        $this->assertEquals(['foo' => 'baz'], $client->get('test'));
+        $this->assertRequest($this->container[0]['request'], 'GET', 'http://example.com/api/3/test');
+    }
+
+    public function testPost()
+    {
+        $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
+
+        $this->assertEquals(['foo' => 'baz'], $client->post('test', ['key' => 'value']));
+        $this->assertRequest($this->container[0]['request'], 'POST', 'http://example.com/api/3/test', '{"key":"value"}');
+    }
+
+    public function testPut()
+    {
+        $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
+
+        $this->assertEquals(['foo' => 'baz'], $client->put('test', ['key' => 'value']));
+        $this->assertRequest($this->container[0]['request'], 'PUT', 'http://example.com/api/3/test', '{"key":"value"}');
+    }
+
+    public function testDelete()
+    {
+        $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
+
+        $this->assertEquals(['foo' => 'baz'], $client->delete('test'));
+        $this->assertRequest($this->container[0]['request'], 'DELETE', 'http://example.com/api/3/test');
+    }
+
+    private function createGuzzleClient(Response $expectedResponse)
     {
         $mock = new MockHandler([
-            new Response(200, [], '{"foo":"baz"}')
+            $expectedResponse
         ]);
 
         $handler = HandlerStack::create($mock);
@@ -47,32 +74,20 @@ final class ClientTest extends TestCase
         $history = Middleware::history($this->container);
         $handler->push($history);
 
-        $guzzleClient = new GuzzleClient(['handler' => $handler]);
-        $this->client = new Client('http://example.com', 'super-secret-token', $guzzleClient);
+        return new GuzzleClient(['handler' => $handler]);
     }
 
-    public function testGet()
+    /**
+     * @param Response $expectedResponse
+     * @return Client
+     */
+    private function createClient(Response $expectedResponse)
     {
-        $this->assertEquals(['foo' => 'baz'], $this->client->get('test'));
-        $this->assertRequest($this->container[0]['request'], 'GET', 'http://example.com/api/3/test');
-    }
-
-    public function testPost()
-    {
-        $this->assertEquals(['foo' => 'baz'], $this->client->post('test', ['key' => 'value']));
-        $this->assertRequest($this->container[0]['request'], 'POST', 'http://example.com/api/3/test', '{"key":"value"}');
-    }
-
-    public function testPut()
-    {
-        $this->assertEquals(['foo' => 'baz'], $this->client->put('test', ['key' => 'value']));
-        $this->assertRequest($this->container[0]['request'], 'PUT', 'http://example.com/api/3/test', '{"key":"value"}');
-    }
-
-    public function testDelete()
-    {
-        $this->assertEquals(['foo' => 'baz'], $this->client->delete('test'));
-        $this->assertRequest($this->container[0]['request'], 'DELETE', 'http://example.com/api/3/test');
+        return new Client(
+            'http://example.com',
+            'super-secret-token',
+            $this->createGuzzleClient($expectedResponse)
+        );
     }
 
     private function assertRequest(RequestInterface $request, $method, $uri, $body = null)
