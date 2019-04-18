@@ -25,7 +25,7 @@ use GuzzleHttp\RequestOptions;
  *
  * @author Daniele De Nobili
  */
-final class Client
+final class Client implements ClientInterface
 {
     /**
      * @var string
@@ -55,9 +55,7 @@ final class Client
     }
 
     /**
-     * @param string $path
-     * @return Result
-     * @throws GuzzleException
+     * @inheritdoc
      */
     public function get($path)
     {
@@ -65,10 +63,7 @@ final class Client
     }
 
     /**
-     * @param string $path
-     * @param array  $body
-     * @return Result
-     * @throws GuzzleException
+     * @inheritdoc
      */
     public function post($path, array $body)
     {
@@ -76,10 +71,7 @@ final class Client
     }
 
     /**
-     * @param string $path
-     * @param array  $body
-     * @return Result
-     * @throws GuzzleException
+     * @inheritdoc
      */
     public function put($path, array $body)
     {
@@ -87,9 +79,7 @@ final class Client
     }
 
     /**
-     * @param string $path
-     * @return Result
-     * @throws GuzzleException
+     * @inheritdoc
      */
     public function delete($path)
     {
