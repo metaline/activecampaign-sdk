@@ -138,6 +138,18 @@ final class ClientTest extends TestCase
         $this->assertEquals($errors, $result->getErrors());
     }
 
+    public function testCorrectCredentials()
+    {
+        $client = $this->createClient(new Response(200, [], '{"user":{}}'));
+        $this->assertTrue($client->testCredentials());
+    }
+
+    public function testWrongCredentials()
+    {
+        $client = $this->createClient(new Response(403));
+        $this->assertFalse($client->testCredentials());
+    }
+
     /**
      * @param Response $expectedResponse
      * @return GuzzleClient

@@ -87,6 +87,14 @@ final class Client implements ClientInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function testCredentials()
+    {
+        return $this->sendRequest('GET', 'users/me')->isSuccessful();
+    }
+
+    /**
      * @param string $method
      * @param string $path
      * @param array  $data

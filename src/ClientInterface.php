@@ -43,4 +43,9 @@ interface ClientInterface
      * @return Result
      */
     public function delete($path);
+
+    /**
+     * @return bool
+     */
+    public function testCredentials();
 }
