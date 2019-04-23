@@ -2,8 +2,8 @@
 
 # ActiveCampaign API SDK
 
-[![Build Status](https://travis-ci.org/metaline/activecampaign-api.svg?branch=master)](https://travis-ci.org/metaline/activecampaign-api)
-[![Coverage Status](https://coveralls.io/repos/github/metaline/activecampaign-api/badge.svg?branch=master)](https://coveralls.io/github/metaline/activecampaign-api?branch=master)
+[![Build Status](https://travis-ci.org/metaline/activecampaign-sdk.svg?branch=master)](https://travis-ci.org/metaline/activecampaign-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/metaline/activecampaign-sdk/badge.svg?branch=master)](https://coveralls.io/github/metaline/activecampaign-sdk?branch=master)
 
 This library is a simple PHP wrapper for the [ActiveCampaign API v3](https://developers.activecampaign.com/v3/reference).
 
