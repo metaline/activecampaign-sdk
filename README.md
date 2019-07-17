@@ -1,5 +1,3 @@
-**🚧 This project is in early development stage and it could change significantly in the future.**
-
 # ActiveCampaign API SDK
 
 [![Build Status](https://travis-ci.org/metaline/activecampaign-sdk.svg?branch=master)](https://travis-ci.org/metaline/activecampaign-sdk)
