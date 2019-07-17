@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0] - 2019-07-17
+
 ### Added
 
 - This CHANGELOG file
