@@ -6,7 +6,7 @@
         "api",
         "sdk"
     ],
-    "homepage": "https://github.com/metaline/activecampaign-api",
+    "homepage": "https://github.com/metaline/activecampaign-sdk",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -17,8 +17,8 @@
         }
     ],
     "support": {
-        "source": "https://github.com/metaline/activecampaign-api",
-        "issues": "https://github.com/metaline/activecampaign-api/issues"
+        "source": "https://github.com/metaline/activecampaign-sdk",
+        "issues": "https://github.com/metaline/activecampaign-sdk/issues"
     },
     "require": {
         "php": "^5.6 || ^7.1",
