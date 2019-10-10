@@ -67,9 +67,9 @@ And so on.
 
 Check the ActiveCampaign [documentation](https://developers.activecampaign.com/v3/reference) for the other APIs.
 
-### Works with the Result object
+### Work with the Result object
 
-Client method calls always return a `Result` object, that it’s a simple value object:
+All Client methods return a `Result` object, that it’s a simple value object:
 
 ```php
 if ($result->isSuccessful()) {
