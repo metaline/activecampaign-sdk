@@ -41,7 +41,7 @@ final class ResultTest extends TestCase
     public function testWithErrors()
     {
         $data = ['foo' => 'bar'];
-        $result = new Result(false, $data);
+        $result = new Result(false, [], $data);
 
         $this->assertFalse($result->isSuccessful());
         $this->assertEquals([], $result->getData());

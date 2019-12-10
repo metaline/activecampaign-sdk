@@ -101,6 +101,27 @@ final class ClientTest extends TestCase
         $this->assertEquals([], $result->getErrors());
     }
 
+    public function testMessageError()
+    {
+        $client = $this->createClient(
+            new Response(404, [], '{"message":"No Result found for Subscriber with id 18"}')
+        );
+
+        $result = $client->get('test');
+
+        $errors = [
+            'errors' => [
+                [
+                    'title' => 'No Result found for Subscriber with id 18',
+                ],
+            ],
+        ];
+
+        $this->assertFalse($result->isSuccessful());
+        $this->assertEquals([], $result->getData());
+        $this->assertEquals($errors, $result->getErrors());
+    }
+
     /**
      * Tests API calls that returns explained errors.
      *

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Improved the error handling, see #1 for details.
+
 ## [1.0.0] - 2019-07-17
 
 ### Added

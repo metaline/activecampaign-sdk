@@ -34,15 +34,16 @@ final class Result
     /**
      * @param bool  $successful
      * @param array $result
+     * @param array $errors
      */
-    public function __construct($successful = true, array $result = [])
+    public function __construct($successful = true, array $result = [], array $errors = [])
     {
         $this->successful = $successful;
 
         if ($successful) {
             $this->data = $result;
         } else {
-            $this->errors = $result;
+            $this->errors = $errors;
         }
     }
 

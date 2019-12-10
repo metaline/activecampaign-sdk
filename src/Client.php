@@ -117,14 +117,24 @@ final class Client implements ClientInterface
 
         try {
             $response = $this->guzzleClient->request($method, $uri, $requestOptions);
-            $successful = true;
+            $result = (array) json_decode($response->getBody(), true);
+
+            return new Result(true, $result);
         } catch (ClientException $e) {
-            $response = $e->getResponse();
-            $successful = false;
+            $errors = [];
+            $result = (array) json_decode($e->getResponse()->getBody(), true);
+
+            if (isset($result['message'])) {
+                $errors['errors'] = [
+                    [
+                        'title' => $result['message'],
+                    ]
+                ];
+            } elseif (isset($result['errors']) && is_array($result['errors'])) {
+                $errors = $result;
+            }
+
+            return new Result(false, [], $errors);
         }
-
-        $result = (array) json_decode($response->getBody(), true);
-
-        return new Result($successful, $result);
     }
 }
