@@ -11,13 +11,18 @@
 
 namespace MetaLine\ActiveCampaign\Tests;
 
+use Exception;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
 use MetaLine\ActiveCampaign\Client;
+use MetaLine\ActiveCampaign\Tests\Fixture\GenericGuzzleException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -150,6 +155,36 @@ final class ClientTest extends TestCase
                     'source' => [
                         'pointer' => '/data/attributes/externalid',
                     ],
+                ],
+            ],
+        ];
+
+        $this->assertFalse($result->isSuccessful());
+        $this->assertEquals([], $result->getData());
+        $this->assertEquals($errors, $result->getErrors());
+    }
+
+    public function testGenericGuzzleException()
+    {
+        /** @var ClientInterface|PHPUnit_Framework_MockObject_MockObject $guzzleClient */
+        $guzzleClient = $this->createMock(ClientInterface::class);
+
+        /** @var GuzzleException|Exception|PHPUnit_Framework_MockObject_MockObject $guzzleException */
+        $guzzleException = new GenericGuzzleException('The exception message');
+
+        $client = new Client(
+            'http://example.com',
+            'super-secret-token',
+            $guzzleClient
+        );
+
+        $guzzleClient->expects($this->any())->method('request')->willThrowException($guzzleException);
+        $result = $client->get('test');
+
+        $errors = [
+            'errors' => [
+                [
+                    'title'  => 'The exception message',
                 ],
             ],
         ];

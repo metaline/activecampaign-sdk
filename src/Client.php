@@ -135,6 +135,14 @@ final class Client implements ClientInterface
             }
 
             return new Result(false, [], $errors);
+        } catch (GuzzleException $e) {
+            $errors['errors'] = [
+                [
+                    'title' => $e->getMessage(),
+                ]
+            ];
+
+            return new Result(false, [], $errors);
         }
     }
 }

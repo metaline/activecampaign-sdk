@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Handled generic Guzzle exception.
+
 ## [1.0.1] - 2019-12-10
 
 ### Fixed
