@@ -11,10 +11,7 @@
 
 namespace MetaLine\ActiveCampaign\Tests;
 
-use Exception;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
@@ -22,7 +19,6 @@ use GuzzleHttp\Psr7\Response;
 use MetaLine\ActiveCampaign\Client;
 use MetaLine\ActiveCampaign\Tests\Fixture\GenericGuzzleException;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -166,19 +162,7 @@ final class ClientTest extends TestCase
 
     public function testGenericGuzzleException()
     {
-        /** @var ClientInterface|PHPUnit_Framework_MockObject_MockObject $guzzleClient */
-        $guzzleClient = $this->createMock(ClientInterface::class);
-
-        /** @var GuzzleException|Exception|PHPUnit_Framework_MockObject_MockObject $guzzleException */
-        $guzzleException = new GenericGuzzleException('The exception message');
-
-        $client = new Client(
-            'http://example.com',
-            'super-secret-token',
-            $guzzleClient
-        );
-
-        $guzzleClient->expects($this->any())->method('request')->willThrowException($guzzleException);
+        $client = $this->createClient(new GenericGuzzleException('The exception message'));
         $result = $client->get('test');
 
         $errors = [
@@ -207,10 +191,10 @@ final class ClientTest extends TestCase
     }
 
     /**
-     * @param Response $expectedResponse
+     * @param mixed $expectedResponse
      * @return GuzzleClient
      */
-    private function createGuzzleClient(Response $expectedResponse)
+    private function createGuzzleClient($expectedResponse)
     {
         $mock = new MockHandler([
             $expectedResponse
@@ -225,10 +209,10 @@ final class ClientTest extends TestCase
     }
 
     /**
-     * @param Response $expectedResponse
+     * @param mixed $expectedResponse
      * @return Client
      */
-    private function createClient(Response $expectedResponse)
+    private function createClient($expectedResponse)
     {
         return new Client(
             'http://example.com',
