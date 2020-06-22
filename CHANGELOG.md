@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.2] - 2020-06-22
+
 ### Fixed
 
 - Handled generic Guzzle exception.
