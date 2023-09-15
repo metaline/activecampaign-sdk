@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Updated supported PHP versions.
+
 ## [1.0.2] - 2020-06-22
 
 ### Fixed
