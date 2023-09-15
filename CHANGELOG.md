@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.3] - 2023-09-15
+
 ### Fixed
 
 - Updated supported PHP versions.
+- Bumped to Guzzle 7.
+- Replaced Travis with GitHub Actions.
 
 ## [1.0.2] - 2020-06-22
 
