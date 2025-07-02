@@ -45,7 +45,7 @@ return ECSConfig::configure()
         false, // php81Migration
         false, // php82Migration
         false, // php83Migration
-        false, // php84Migration
+        true, // php84Migration
         false, // phpunit30MigrationRisky
         false, // phpunit32MigrationRisky
         false, // phpunit35MigrationRisky

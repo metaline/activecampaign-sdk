@@ -47,7 +47,7 @@ final class Client implements ClientInterface
      * @param string                     $apiKey
      * @param GuzzleClientInterface|null $guzzleClient
      */
-    public function __construct($apiUrl, $apiKey, GuzzleClientInterface $guzzleClient = null)
+    public function __construct($apiUrl, $apiKey, ?GuzzleClientInterface $guzzleClient = null)
     {
         $this->apiUrl = $apiUrl . '/api/3/';
         $this->apiKey = $apiKey;
@@ -101,7 +101,7 @@ final class Client implements ClientInterface
      * @return Result
      * @throws GuzzleException
      */
-    private function sendRequest($method, $path, array $data = null)
+    private function sendRequest($method, $path, ?array $data = null)
     {
         $uri = $this->apiUrl . $path;
 

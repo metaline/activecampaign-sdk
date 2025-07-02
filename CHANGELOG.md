@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Added Easy Coding Standard.
 
+### Fixed
+
+- Fixed PHP 8.4 deprecations.
+
 ## [1.0.3] - 2023-09-15
 
 ### Fixed
