@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added Easy Coding Standard.
+- Added type hints and removed useless docs.
 
 ### Fixed
 

@@ -11,9 +11,6 @@
 
 namespace MetaLine\ActiveCampaign;
 
-/**
- * Result
- */
 final class Result
 {
     /**
@@ -31,12 +28,7 @@ final class Result
      */
     private $errors = [];
 
-    /**
-     * @param bool  $successful
-     * @param array $result
-     * @param array $errors
-     */
-    public function __construct($successful = true, array $result = [], array $errors = [])
+    public function __construct(bool $successful = true, array $result = [], array $errors = [])
     {
         $this->successful = $successful;
 
@@ -49,10 +41,8 @@ final class Result
 
     /**
      * Returns true if the client response is successful, false otherwise.
-     *
-     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->successful;
     }
@@ -61,10 +51,8 @@ final class Result
      * Returns the data returned from the client call.
      *
      * If the result is failed, this method returns an empty array.
-     *
-     * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
@@ -73,10 +61,8 @@ final class Result
      * Returns the errors returned from the client call.
      *
      * If the result is successful, this method returns an empty array.
-     *
-     * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

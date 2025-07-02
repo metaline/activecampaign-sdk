@@ -18,34 +18,13 @@ namespace MetaLine\ActiveCampaign;
  */
 interface ClientInterface
 {
-    /**
-     * @param string $path
-     * @return Result
-     */
-    public function get($path);
+    public function get(string $path): Result;
 
-    /**
-     * @param string $path
-     * @param array  $body
-     * @return Result
-     */
-    public function post($path, array $body);
+    public function post(string $path, array $body): Result;
 
-    /**
-     * @param string $path
-     * @param array  $body
-     * @return Result
-     */
-    public function put($path, array $body);
+    public function put(string $path, array $body): Result;
 
-    /**
-     * @param string $path
-     * @return Result
-     */
-    public function delete($path);
+    public function delete(string $path): Result;
 
-    /**
-     * @return bool
-     */
-    public function testCredentials();
+    public function testCredentials(): bool;
 }

@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class ResultTest extends TestCase
 {
-    public function testDefault()
+    public function testDefault(): void
     {
         $result = new Result();
 
@@ -28,7 +28,7 @@ final class ResultTest extends TestCase
         $this->assertEquals([], $result->getErrors());
     }
 
-    public function testWithData()
+    public function testWithData(): void
     {
         $data = ['foo' => 'bar'];
         $result = new Result(true, $data);
@@ -38,7 +38,7 @@ final class ResultTest extends TestCase
         $this->assertEquals([], $result->getErrors());
     }
 
-    public function testWithErrors()
+    public function testWithErrors(): void
     {
         $data = ['foo' => 'bar'];
         $result = new Result(false, [], $data);

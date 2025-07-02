@@ -42,66 +42,39 @@ final class Client implements ClientInterface
      */
     private $guzzleClient;
 
-    /**
-     * @param string                     $apiUrl
-     * @param string                     $apiKey
-     * @param GuzzleClientInterface|null $guzzleClient
-     */
-    public function __construct($apiUrl, $apiKey, ?GuzzleClientInterface $guzzleClient = null)
+    public function __construct(string $apiUrl, string $apiKey, ?GuzzleClientInterface $guzzleClient = null)
     {
         $this->apiUrl = $apiUrl . '/api/3/';
         $this->apiKey = $apiKey;
         $this->guzzleClient = $guzzleClient ?: new GuzzleClient();
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function get($path)
+    public function get(string $path): Result
     {
         return $this->sendRequest('GET', $path);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function post($path, array $body)
+    public function post(string $path, array $body): Result
     {
         return $this->sendRequest('POST', $path, $body);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function put($path, array $body)
+    public function put(string $path, array $body): Result
     {
         return $this->sendRequest('PUT', $path, $body);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function delete($path)
+    public function delete(string $path): Result
     {
         return $this->sendRequest('DELETE', $path);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function testCredentials()
+    public function testCredentials(): bool
     {
         return $this->sendRequest('GET', 'users/me')->isSuccessful();
     }
 
-    /**
-     * @param string $method
-     * @param string $path
-     * @param array  $data
-     * @return Result
-     * @throws GuzzleException
-     */
-    private function sendRequest($method, $path, ?array $data = null)
+    private function sendRequest(string $method, string $path, ?array $data = null): Result
     {
         $uri = $this->apiUrl . $path;
 

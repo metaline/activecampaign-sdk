@@ -35,7 +35,7 @@ final class ClientTest extends TestCase
     /**
      * Tests a API call with GET method.
      */
-    public function testGet()
+    public function testGet(): void
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
         $result = $client->get('test');
@@ -49,7 +49,7 @@ final class ClientTest extends TestCase
     /**
      * Tests a API call with POST method.
      */
-    public function testPost()
+    public function testPost(): void
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
         $result = $client->post('test', ['key' => 'value']);
@@ -68,7 +68,7 @@ final class ClientTest extends TestCase
     /**
      * Tests a API call with PUT method.
      */
-    public function testPut()
+    public function testPut(): void
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
         $result = $client->put('test', ['key' => 'value']);
@@ -82,7 +82,7 @@ final class ClientTest extends TestCase
     /**
      * Tests a API call with DELETE method.
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         $client = $this->createClient(new Response(200, [], '{"foo":"baz"}'));
         $result = $client->delete('test');
@@ -96,7 +96,7 @@ final class ClientTest extends TestCase
     /**
      * Tests API calls that returns errors.
      */
-    public function testGenericErrors()
+    public function testGenericErrors(): void
     {
         $client = $this->createClient(new Response(400));
         $result = $client->get('test');
@@ -106,7 +106,7 @@ final class ClientTest extends TestCase
         $this->assertEquals([], $result->getErrors());
     }
 
-    public function testMessageError()
+    public function testMessageError(): void
     {
         $client = $this->createClient(
             new Response(404, [], '{"message":"No Result found for Subscriber with id 18"}'),
@@ -132,7 +132,7 @@ final class ClientTest extends TestCase
      *
      * @link https://developers.activecampaign.com/reference#errors
      */
-    public function testExplainedErrors()
+    public function testExplainedErrors(): void
     {
         $client = $this->createClient(new Response(
             400,
@@ -164,7 +164,7 @@ final class ClientTest extends TestCase
         $this->assertEquals($errors, $result->getErrors());
     }
 
-    public function testGenericGuzzleException()
+    public function testGenericGuzzleException(): void
     {
         $client = $this->createClient(new GenericGuzzleException('The exception message'));
         $result = $client->get('test');
@@ -182,23 +182,19 @@ final class ClientTest extends TestCase
         $this->assertEquals($errors, $result->getErrors());
     }
 
-    public function testCorrectCredentials()
+    public function testCorrectCredentials(): void
     {
         $client = $this->createClient(new Response(200, [], '{"user":{}}'));
         $this->assertTrue($client->testCredentials());
     }
 
-    public function testWrongCredentials()
+    public function testWrongCredentials(): void
     {
         $client = $this->createClient(new Response(403));
         $this->assertFalse($client->testCredentials());
     }
 
-    /**
-     * @param mixed $expectedResponse
-     * @return GuzzleClient
-     */
-    private function createGuzzleClient($expectedResponse)
+    private function createGuzzleClient($expectedResponse): GuzzleClient
     {
         $mock = new MockHandler([
             $expectedResponse,
@@ -212,11 +208,7 @@ final class ClientTest extends TestCase
         return new GuzzleClient(['handler' => $handler]);
     }
 
-    /**
-     * @param mixed $expectedResponse
-     * @return Client
-     */
-    private function createClient($expectedResponse)
+    private function createClient($expectedResponse): Client
     {
         return new Client(
             'http://example.com',
@@ -225,13 +217,7 @@ final class ClientTest extends TestCase
         );
     }
 
-    /**
-     * @param RequestInterface $request
-     * @param string           $method
-     * @param string           $uri
-     * @param string           $body
-     */
-    private function assertRequest(RequestInterface $request, $method, $uri, $body = null)
+    private function assertRequest(RequestInterface $request, string $method, string $uri, string $body = null): void
     {
         $this->assertEquals($method, $request->getMethod());
         $this->assertEquals($uri, $request->getUri()->__toString());
