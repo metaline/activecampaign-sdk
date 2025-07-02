@@ -57,8 +57,12 @@ final class ClientTest extends TestCase
         $this->assertTrue($result->isSuccessful());
         $this->assertEquals(['foo' => 'baz'], $result->getData());
         $this->assertEquals([], $result->getErrors());
-        $this->assertRequest($this->container[0]['request'], 'POST', 'http://example.com/api/3/test',
-            '{"key":"value"}');
+        $this->assertRequest(
+            $this->container[0]['request'],
+            'POST',
+            'http://example.com/api/3/test',
+            '{"key":"value"}',
+        );
     }
 
     /**
@@ -105,7 +109,7 @@ final class ClientTest extends TestCase
     public function testMessageError()
     {
         $client = $this->createClient(
-            new Response(404, [], '{"message":"No Result found for Subscriber with id 18"}')
+            new Response(404, [], '{"message":"No Result found for Subscriber with id 18"}'),
         );
 
         $result = $client->get('test');
@@ -133,7 +137,7 @@ final class ClientTest extends TestCase
         $client = $this->createClient(new Response(
             400,
             [],
-            '{"errors":[{"title":"The connection service was not provided.","source":{"pointer":"\/data\/attributes\/service"}},{"title":"The connection externalid was not provided.","source":{"pointer":"\/data\/attributes\/externalid"}}]}'
+            '{"errors":[{"title":"The connection service was not provided.","source":{"pointer":"\/data\/attributes\/service"}},{"title":"The connection externalid was not provided.","source":{"pointer":"\/data\/attributes\/externalid"}}]}',
         ));
 
         $result = $client->get('test');
@@ -168,7 +172,7 @@ final class ClientTest extends TestCase
         $errors = [
             'errors' => [
                 [
-                    'title'  => 'The exception message',
+                    'title' => 'The exception message',
                 ],
             ],
         ];
@@ -197,7 +201,7 @@ final class ClientTest extends TestCase
     private function createGuzzleClient($expectedResponse)
     {
         $mock = new MockHandler([
-            $expectedResponse
+            $expectedResponse,
         ]);
 
         $handler = HandlerStack::create($mock);
@@ -217,7 +221,7 @@ final class ClientTest extends TestCase
         return new Client(
             'http://example.com',
             'super-secret-token',
-            $this->createGuzzleClient($expectedResponse)
+            $this->createGuzzleClient($expectedResponse),
         );
     }
 

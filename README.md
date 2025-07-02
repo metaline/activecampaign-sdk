@@ -81,6 +81,14 @@ if ($result->isSuccessful()) {
 
 Debug the result to discover how to proceed.
 
+## Coding Standard
+
+This project follows the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard. To ensure code consistency and facilitate development, you can check the codebase against these standards by running the following command:
+
+```bash
+composer run cs
+```
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.

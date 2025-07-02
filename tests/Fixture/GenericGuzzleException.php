@@ -17,6 +17,4 @@ use GuzzleHttp\Exception\GuzzleException;
 /**
  * GenericGuzzleException
  */
-final class GenericGuzzleException extends Exception implements GuzzleException
-{
-}
+final class GenericGuzzleException extends Exception implements GuzzleException {}

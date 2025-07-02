@@ -128,7 +128,7 @@ final class Client implements ClientInterface
                 $errors['errors'] = [
                     [
                         'title' => $result['message'],
-                    ]
+                    ],
                 ];
             } elseif (isset($result['errors']) && is_array($result['errors'])) {
                 $errors = $result;
@@ -139,7 +139,7 @@ final class Client implements ClientInterface
             $errors['errors'] = [
                 [
                     'title' => $e->getMessage(),
-                ]
+                ],
             ];
 
             return new Result(false, [], $errors);

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Added Easy Coding Standard.
+
 ## [1.0.3] - 2023-09-15
 
 ### Fixed
