@@ -14,7 +14,4 @@ namespace MetaLine\ActiveCampaign\Tests\Fixture;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
-/**
- * GenericGuzzleException
- */
 final class GenericGuzzleException extends Exception implements GuzzleException {}

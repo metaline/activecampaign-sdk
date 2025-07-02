@@ -20,24 +20,30 @@ use GuzzleHttp\RequestOptions;
 /**
  * The Client is the main entry point to access the ActiveCampaign APIs.
  *
- * For create an instance of the Client you need a URL and a KEY. These parameters are specific to
- * your ActiveCampaign account. You can find them under Settings / Developer section of your profile.
+ * To create an instance of the Client, you need a URL and a KEY. These parameters are specific to
+ * your ActiveCampaign account. You can find them under the section Settings / Developer of your profile.
  *
  * @author Daniele De Nobili
  */
 final class Client implements ClientInterface
 {
     /**
+     * ActiveCampaign API base URL
+     *
      * @var string
      */
     private $apiUrl;
 
     /**
+     * API key for authentication
+     *
      * @var string
      */
     private $apiKey;
 
     /**
+     * Guzzle HTTP client for making requests
+     *
      * @var GuzzleClientInterface
      */
     private $guzzleClient;

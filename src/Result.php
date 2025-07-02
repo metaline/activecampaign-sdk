@@ -11,6 +11,15 @@
 
 namespace MetaLine\ActiveCampaign;
 
+/**
+ * Result Container
+ *
+ * Encapsulates the result of an API call, providing access to success status,
+ * response data, and error information. This class is returned by all Client
+ * methods to provide a consistent interface for handling API responses.
+ *
+ * @author Daniele De Nobili
+ */
 final class Result
 {
     /**
@@ -40,7 +49,7 @@ final class Result
     }
 
     /**
-     * Returns true if the client response is successful, false otherwise.
+     * Checks if the API request was successful
      */
     public function isSuccessful(): bool
     {
@@ -48,7 +57,7 @@ final class Result
     }
 
     /**
-     * Returns the data returned from the client call.
+     * Gets the response data from successful API calls
      *
      * If the result is failed, this method returns an empty array.
      */
@@ -58,7 +67,7 @@ final class Result
     }
 
     /**
-     * Returns the errors returned from the client call.
+     * Gets the error information from failed API calls
      *
      * If the result is successful, this method returns an empty array.
      */
